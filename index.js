@@ -56,6 +56,25 @@ async function run() {
             res.send(result)
         })
 
+
+        app.put('/inventory/:id', async (req, res) => {
+            const id = req.params.id;
+
+            const Updatedquantity = req.body;
+            const stringyfy = JSON.stringify(Updatedquantity)
+
+            const filter = { _id: ObjectId(id) };
+            const options = { upsert: true };
+            const updateDoc = {
+                $set: {
+                    quantity: stringyfy.quantity
+                }
+            }
+            const result = await serviceCollection.updateOne(filter, updateDoc, options);
+            res.send(result);
+
+        })
+
     }
 
     finally {
