@@ -48,6 +48,14 @@ async function run() {
             res.send(result)
         })
 
+        // post api 
+
+        app.post('/add-item', async (req, res) => {
+            const newInventory = req.body;
+            const result = await serviceCollection.insertOne(newInventory)
+            res.send(result)
+        })
+
     }
 
     finally {
